@@ -1,0 +1,13 @@
+{"namespace": "reproduccion.avro",
+  "type": "record",
+  "name": "Cancion",
+  "fields": [
+	{"name": "userid", "type": "long","doc":"id de usuario"},
+	{"name": "timestamp", "type": "long","doc":"hora de reproduccion"},
+	{"name": "artid", "type": "long","doc":"id del cantante"},
+	{"name": "artname", "type": "string","doc":"nombre del cantante"},
+	{"name": "traid", "type": "long","doc":"id de la cancion"},
+	{"name": "traname", "type": "string","doc":"nombre de la cancion"}
+    
+  ]
+}

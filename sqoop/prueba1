@@ -1,0 +1,12 @@
+sqoop import --connect jdbc:mysql://localhost/practica --username cloudera --password cloudera --table clientes --null-non-string '\\N' --target-dir /recomendador/clientes --split-by id --driver com.mysql.jdbc.Driver --fields-terminated-by '\t'
+
+la password es cloudera (usuario de la base de datos mysql)
+
+#!/bin/bash
+
+if [ -z "$1" ]
+  then
+    FECHA=`date --date=$dt "+%Y-%m-%d"`
+  else
+    FECHA=$1	
+fi

@@ -1,0 +1,17 @@
+
+flume-ng agent --conf-file flume1.conf --name agent1
+
+
+#agent1.channels.c1.type = file
+#agent1.channels.c1.checkpointDir = /root/Desktop/Parte1_Recomendador/checkpoint
+#agent1.channels.c1.dataDirs = checkpoint/data
+
+#agent1.sinks.k1.hdfs.filePrefix = events-
+
+#agent1.sinks.k1.serializer = org.apache.flume.sink.hdfs.AvroEventSerializer$Builder
+#agent1.sinks.k1.serializer.schemaURL = hdfs://tmp/flume_events/schema/schemaEvent.avsc
+
+
+agent1.sinks.k1.type = hdfs
+agent1.sinks.k1.channel = c1
+agent1.sinks.k1.hdfs.path = /tmp/flume_events/events/asd
