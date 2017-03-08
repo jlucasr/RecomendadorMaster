@@ -1,0 +1,30 @@
+// El agent1.conf seria asi:
+# Name the components on this agent
+agent1.sources = spoolDirSource
+agent1.sinks = HDFSSink
+agent1.channels = kafkaChannel
+
+# Describe/configure the source
+agent1.sources.spoolDirSource.type = spooldir
+agent1.sources.spoolDirSource.spoolDir = /RUTALOCALFILE
+
+# Describe the sink
+agent1.sinks.HDFSSink.type = hdfs
+agent1.sinks.HDFSSink.channel = kafkaChannel
+agent1.sinks.HDFSSink.path = /RUTAHDFS
+
+# Use a channel which buffers events in Kafka
+agent1.channels.kafkaChannel.type = org.apache.flume.channel.kafka.KafkaChannel
+agent1.channels.kafkaChannel.kafka.bootstrap.servers = localhost:9092
+agent1.channels.kafkaChannel.kafka.group.id = 
+agent1.channels.kafkaChannel.kafka.topic = 
+
+# Bind the source and sink to the channel
+agent1.sources.spoolDirSource.channels = kafkaChannel
+agent1.sinks.HDFSSink.channel = kafkaChannel
+
+// Despues se ejecuta desde ese directorio el agent1.conf
+flume-ng agent --conf-file agent1.conf --name agent1
+
+// Despues conectamos y metemos datos en el puerto para comprobar que recogemos los datos en Flume
+nc localhost 44444
