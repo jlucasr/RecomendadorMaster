@@ -1,30 +1,30 @@
-// El agent1.conf seria asi:
+// El flumeAgent.conf seria asi:
 # Name the components on this agent
-agent1.sources = spoolDirSource
-agent1.sinks = HDFSSink
-agent1.channels = kafkaChannel
+flumeAgent.sources = spoolDirSource
+flumeAgent.sinks = HDFSSink
+flumeAgent.channels = kafkaChannel
 
 # Describe/configure the source
-agent1.sources.spoolDirSource.type = spooldir
-agent1.sources.spoolDirSource.spoolDir = /RUTALOCALFILE
+flumeAgent.sources.spoolDirSource.type = spooldir
+flumeAgent.sources.spoolDirSource.spoolDir = /home/cloudera/mrec/MusicRecommendation/lastfm-dataset-1K/
 
 # Describe the sink
-agent1.sinks.HDFSSink.type = hdfs
-agent1.sinks.HDFSSink.channel = kafkaChannel
-agent1.sinks.HDFSSink.path = /RUTAHDFS
+flumeAgent.sinks.HDFSSink.type = hdfs
+flumeAgent.sinks.HDFSSink.hdfs.channel = kafkaChannel
+flumeAgent.sinks.HDFSSink.hdfs.path = /user/cloudera/MusicRecommendation/events/
+flumeAgent.sinks.HDFSSink.hdfs.rollSize = 500000
+flumeAgent.sinks.HDFSSink.hdfs.fileType = SequenceFile
 
 # Use a channel which buffers events in Kafka
-agent1.channels.kafkaChannel.type = org.apache.flume.channel.kafka.KafkaChannel
-agent1.channels.kafkaChannel.kafka.bootstrap.servers = localhost:9092
-agent1.channels.kafkaChannel.kafka.group.id = 
-agent1.channels.kafkaChannel.kafka.topic = 
+flumeAgent.channels.kafkaChannel.type = org.apache.flume.channel.kafka.KafkaChannel
+flumeAgent.channels.kafkaChannel.kafka.bootstrap.servers = localhost:9092
+flumeAgent.channels.kafkaChannel.kafka.group.id = flume
+flumeAgent.channels.kafkaChannel.kafka.topic = flume-channel
 
 # Bind the source and sink to the channel
-agent1.sources.spoolDirSource.channels = kafkaChannel
-agent1.sinks.HDFSSink.channel = kafkaChannel
+flumeAgent.sources.spoolDirSource.channels = kafkaChannel
+flumeAgent.sinks.HDFSSink.channel = kafkaChannel
 
-// Despues se ejecuta desde ese directorio el agent1.conf
-flume-ng agent --conf-file agent1.conf --name agent1
+// Despues se ejecuta desde ese directorio el flumeAgent.conf
+flume-ng agent --conf-file flumeAgent.conf --name flumeAgent
 
-// Despues conectamos y metemos datos en el puerto para comprobar que recogemos los datos en Flume
-nc localhost 44444
