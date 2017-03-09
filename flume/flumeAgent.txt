@@ -14,7 +14,7 @@ flumeAgent.sinks.HDFSSink.hdfs.path = /user/cloudera/MusicRecommendation/events/
 flumeAgent.sinks.HDFSSink.hdfs.rollSize = 128000000
 flumeAgent.sinks.HDFSSink.hdfs.rollInterval = 0
 flumeAgent.sinks.HDFSSink.hdfs.rollCount = 0
-flumeAgent.sinks.HDFSSink.hdfs.fileType = SequenceFile
+flumeAgent.sinks.HDFSSink.hdfs.fileType = DataStream
 
 # Use a channel which buffers events in Kafka
 flumeAgent.channels.kafkaChannel.type = org.apache.flume.channel.kafka.KafkaChannel
