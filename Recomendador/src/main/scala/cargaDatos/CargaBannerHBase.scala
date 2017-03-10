@@ -9,8 +9,13 @@ import org.apache.hadoop.hbase.spark._
 import java.util.Calendar
 import java.text.SimpleDateFormat 
 
-object CargaHBase extends App {
+  /*
+   *  leer el fichero de la ruta hdfs de los banner y cargarlos en una tabla HBASE
+   */
+object CargaBannerHBase extends App  {
+  
 
+  
   val conf = new SparkConf().setMaster("local[2]").setAppName("My App")
   val sc = new SparkContext(conf)
 
@@ -40,10 +45,10 @@ object CargaHBase extends App {
      admin.createNamespace(nameSpace)
   }
  
-  
-  val tableName = TableName.valueOf("nsRec:clientes")
+  //crear la tabla de banner si no existe
+  val tableName = TableName.valueOf("nsRec:banners")
   val tabledescriptor = new HTableDescriptor(tableName);
-  val nameFam = "datos".getBytes()
+  val nameFam = "banner".getBytes()
   val familyDatos = new HColumnDescriptor(nameFam);
   tabledescriptor.addFamily(familyDatos);
   familyDatos.setMaxVersions(1)
@@ -56,34 +61,20 @@ object CargaHBase extends App {
   val now = Calendar.getInstance().getTime()
   val formatter = new SimpleDateFormat("YYYY-MM-dd")
   val cadNow = formatter.format(now)
-
-  val textEx = sc.textFile(s"hdfs://quickstart.cloudera:8020/user/cloudera/recomendador/$cadNow")
-
-  hbaseContext.bulkPut[String](textEx,
+  
+  val ruta = s"hdfs://quickstart.cloudera:8020/user/cloudera/recomendador/$cadNow/banners"
+  val textEx = sc.textFile(ruta)
+  
+   hbaseContext.bulkPut[String](textEx,
     tableName,
     (putRecord) => {
-      val fields = putRecord.split('\t')
-      
+      val fields = putRecord.split(',')
       System.out.println("Voy a insertar:" + putRecord)
+      
       val put = new Put(Bytes.toBytes(fields(0)))    
       val campo1 = fields(1)
-      if (!campo1.isEmpty()){
-        put.addColumn(nameFam, "sexo".getBytes(), campo1.getBytes())
-      }
-      val campo2 = fields(2)
-      if (!campo2.isEmpty()){
-        put.addColumn(nameFam, "edad".getBytes(), campo2.getBytes())
-      }   
-      val campo3 = fields(3)
-      if (!campo3.isEmpty()){
-        put.addColumn(nameFam, "pais".getBytes(), campo3.getBytes())
-      }
-      val campo4 = fields(4)
-      if (!campo4.isEmpty()){
-        put.addColumn(nameFam, "fecha".getBytes(), campo4.getBytes())
-      }
+      put.addColumn(nameFam, "cadBanner".getBytes(), campo1.getBytes())
       put
     });
-
-
+  
 }

@@ -19,8 +19,12 @@
 				<enabled>false</enabled>
 			</snapshots>
 		</repository>
+		
+		<repository>
+			<id>cloudera</id>
+			<url>https://repository.cloudera.com/artifactory/cloudera-repos/</url>
+		</repository>
 	</repositories>
-
 
 
 
@@ -31,38 +35,49 @@
 			<version>2.11.7</version>
 		</dependency>
 
-		<!-- <dependency> -->
-		<!-- <groupId>org.apache.spark</groupId> -->
-		<!-- <artifactId>spark-core_2.11</artifactId> -->
-		<!-- <version>1.4.1</version> -->
-		<!-- </dependency> -->
+		<dependency>
+		<groupId>org.apache.spark</groupId>
+		<artifactId>spark-core_2.11</artifactId>
+		<version>1.4.1</version>
+		</dependency>
 
 		<dependency>
 			<groupId>org.apache.spark</groupId>
 			<artifactId>spark-core_2.11</artifactId>
 			<version>1.6.0</version>
-		</dependency>
+		</dependency>	
 		<dependency>
 			<groupId>org.apache.spark</groupId>
 			<artifactId>spark-streaming_2.11</artifactId>
 			<version>1.6.0</version>
 		</dependency>
 
-		<dependency>
-			<groupId>org.apache.spark</groupId>
-			<artifactId>spark-mllib_2.11</artifactId>
-			<version>1.6.0</version>
-		</dependency>
+<!-- 		<dependency> -->
+<!-- 			<groupId>org.apache.spark</groupId> -->
+<!-- 			<artifactId>spark-mllib_2.11</artifactId> -->
+<!-- 			<version>1.6.0</version> -->
+<!-- 		</dependency> -->
+<!-- 		<dependency> -->
+<!-- 			<groupId>org.apache.spark</groupId> -->
+<!-- 			<artifactId>spark-streaming-kafka_2.11</artifactId> -->
+<!-- 			<version>1.6.0</version> -->
+<!-- 		</dependency> -->
 
-		<dependency>
-			<groupId>org.apache.spark</groupId>
-			<artifactId>spark-streaming-kafka_2.11</artifactId>
-			<version>1.6.0</version>
-		</dependency>
 		<dependency>
 			<groupId>org.apache.hbase</groupId>
 			<artifactId>hbase-client</artifactId>
-			<version>1.1.2</version>
+			<version>1.2.0</version>
+		</dependency>
+
+		<dependency>
+			<groupId>org.apache.hbase</groupId>
+			<artifactId>hbase-common</artifactId>
+			<version>1.2.0</version>
+		</dependency>
+		<dependency>
+			<groupId>org.apache.hbase</groupId>
+			<artifactId>hbase-spark</artifactId>
+			<version>1.2.0-cdh5.8.0</version>
 		</dependency>
 
 	</dependencies>
