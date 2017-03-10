@@ -1,12 +1,12 @@
 import csv
 import MySQLdb
 
-mydb = MySQLdb.connect(host='localhost', user='cloudera', passwd='cloudera', db='practica')
+mydb = MySQLdb.connect(host='localhost', user='root', passwd='cloudera', db='practica')
 cursor = mydb.cursor()
 cursor.execute('create table if not exists clientes (id INT, gender VARCHAR(255), age VARCHAR(255), country VARCHAR(255), registered VARCHAR(255))')
 
 
-file = 'userid-profile1.tsv'
+file = 'userid-profile.tsv'
 
 with open(file) as tsv:
   for linea in csv.reader(tsv, dialect="excel-tab"):
