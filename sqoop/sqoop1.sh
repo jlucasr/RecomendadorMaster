@@ -9,10 +9,10 @@ fi
 
 
 sqoop job --create addClientes -- import \
---connect jdbc:mysql://localhost/practica \
---username cloudera --password cloudera \
+--connect jdbc:mysql://quickstart.cloudera/practica \
+--username root --password cloudera \
 --table clientes \
---target-dir /recomendador/`echo $FECHA` \
+--target-dir /user/cloudera/MusicRecommendation/users/`echo $FECHA` \
 --null-non-string '\\N' \
 --split-by id \
 --driver com.mysql.jdbc.Driver \
