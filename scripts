@@ -1,5 +1,5 @@
 
-flume-ng agent --conf-file flume1.conf --name agent1
+flume-ng agent --conf-file flume1.conf --name agent1 --plugins-path /root/Documents/Parte1_Recomendador/flume/plugins
 
 
 #agent1.channels.c1.type = file
