@@ -1,0 +1,12 @@
+00000	0	15	m	url1.gif
+00001	0	15	f	url2.gif
+00002	16	25	m	url3.gif
+00003	16	25	f	url4.gif
+00004	26	35	m	url5.gif
+00005	26	35	f	url6.gif
+00006	36	50	m	url7.gif
+00007	36	50	f	url8.gif
+00008	51	65	m	url9.gif
+00009	51	65	f	url10.gif
+00010	66	140	m	url11.gif
+00011	66	140	f	url12.gif
