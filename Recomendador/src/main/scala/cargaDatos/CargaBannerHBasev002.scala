@@ -49,12 +49,12 @@ object CargaHBase extends App {
   } 
   
   // Table name input
-  val tableName = "users"
+  val tableName = "banners"
   val nsAndTableName = TableName.valueOf(nameSpaceN + ":" + tableName)
   val tabledescriptor = new HTableDescriptor(nsAndTableName);
   
   // Column family name input
-  val columnFamilyName = "userData".getBytes()
+  val columnFamilyName = "bannerData".getBytes()
   
   val familyData = new HColumnDescriptor(columnFamilyName);
   tabledescriptor.addFamily(familyData);
@@ -71,7 +71,7 @@ object CargaHBase extends App {
   val stringNow = formatter.format(now)
 
   // HDFS directory input
-  val inputDirectory = "mrec/users/"
+  val inputDirectory = "mrec/banners/"
   val textEx = sc.textFile(s"hdfs://quickstart.cloudera:8020/user/cloudera/" + inputDirectory + "/$stringNow")
   //val textEx = sc.textFile(s"hdfs://quickstart.cloudera:8020/user/cloudera/" + inputDirectory + "2017-03-10")
 
@@ -89,33 +89,33 @@ object CargaHBase extends App {
       
       if (fieldsSize >= 2)
       {
-        val genderField = fields(1)
-        if (!genderField.isEmpty()) {
-          put.addColumn(columnFamilyName, "gender".getBytes(), genderField.getBytes())
+        val minAgeField = fields(1)
+        if (!minAgeField.isEmpty()) {
+          put.addColumn(columnFamilyName, "minAge".getBytes(), minAgeField.getBytes())
         }
       }
       
       if (fieldsSize >= 3)
       {
-		  val ageField = fields(2)
-		  if (!ageField.isEmpty()) {
-			put.addColumn(columnFamilyName, "age".getBytes(), ageField.getBytes())
+		  val maxAgeField = fields(2)
+		  if (!maxAgeField.isEmpty()) {
+			put.addColumn(columnFamilyName, "maxAge".getBytes(), maxAgeField.getBytes())
 		  }
       }
       
       if (fieldsSize >= 4)
       {
-		  val countryField = fields(3)
-		  if (!countryField.isEmpty()) {
-			put.addColumn(columnFamilyName, "country".getBytes(), countryField.getBytes())
+		  val genderField = fields(3)
+		  if (!genderField.isEmpty()) {
+			put.addColumn(columnFamilyName, "gender".getBytes(), genderField.getBytes())
 		  }
       }
       
       if (fieldsSize == 5)
       {
-		  val registerDateField = fields(4)
-		  if (!registerDateField.isEmpty()) {
-			put.addColumn(columnFamilyName, "registerDate".getBytes(), registerDateField.getBytes())
+		  val urlField = fields(4)
+		  if (!urlField.isEmpty()) {
+			put.addColumn(columnFamilyName, "url".getBytes(), urlField.getBytes())
 		  }
       }
       
