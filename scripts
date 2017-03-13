@@ -1,6 +1,7 @@
 
-flume-ng agent --conf-file flume1.conf --name agent1 --plugins-path /root/Documents/Parte1_Recomendador/flume/plugins
+flume-ng agent --conf-file flume1.conf --name agent1 --plugins-path /root/Documents/Parte1_Recomendador/plugins
 
+hive -hiveconf FECHA='2017-03-14' -f add_partitions
 
 #agent1.channels.c1.type = file
 #agent1.channels.c1.checkpointDir = /root/Desktop/Parte1_Recomendador/checkpoint

@@ -36,12 +36,6 @@
 		</dependency>
 
 		<dependency>
-		<groupId>org.apache.spark</groupId>
-		<artifactId>spark-core_2.11</artifactId>
-		<version>1.4.1</version>
-		</dependency>
-
-		<dependency>
 			<groupId>org.apache.spark</groupId>
 			<artifactId>spark-core_2.11</artifactId>
 			<version>1.6.0</version>
@@ -57,12 +51,12 @@
 <!-- 			<artifactId>spark-mllib_2.11</artifactId> -->
 <!-- 			<version>1.6.0</version> -->
 <!-- 		</dependency> -->
-<!-- 		<dependency> -->
-<!-- 			<groupId>org.apache.spark</groupId> -->
-<!-- 			<artifactId>spark-streaming-kafka_2.11</artifactId> -->
-<!-- 			<version>1.6.0</version> -->
-<!-- 		</dependency> -->
 
+		<dependency>
+			<groupId>org.apache.spark</groupId>
+			<artifactId>spark-streaming-kafka_2.11</artifactId>
+			<version>1.6.0</version>
+		</dependency>
 		<dependency>
 			<groupId>org.apache.hbase</groupId>
 			<artifactId>hbase-client</artifactId>
