@@ -36,7 +36,8 @@ object MusicRecALS {
 
     val dataFile = sc.textFile(files)
     .map(_.split("\t"))
-    .map(fields => (fields(1).toInt,fields(6)))
+    // format: (userId, artId)
+    .map(fields => (fields(0).toInt,fields(2)))
     .groupByKey()
 
     val numReg = dataFile.count()
