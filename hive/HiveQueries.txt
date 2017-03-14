@@ -11,5 +11,5 @@ SELECT pa.userid, pa.artid, (pa.playsNumber/tp.totalPlays) AS rating FROM playsO
 JOIN totalPlays tp ON (pa.userid = tp.userid);
 
 CREATE TABLE artistsIds AS
-SELECT DISTINCT(artid), ROW_NUMBER() OVER() AS artistsIds FROM events;
+SELECT DISTINCT(artid), ROW_NUMBER() OVER(PARTITION BY artid) AS artistsIds FROM events;
 
