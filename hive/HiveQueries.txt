@@ -1,0 +1,11 @@
+CREATE TABLE totalPlays AS
+SELECT userid, COUNT(*) AS totalPlays FROM events
+GROUP BY userid;
+
+CREATE TABLE playsOnArtist AS
+SELECT userid, artid, COUNT(*) AS playsOnArtist FROM events
+GROUP BY userid, artid;
+
+CREATE TABLE ratings AS
+SELECT pa.userid, pa.artid, (pa.playsNumber/tp.totalPlays) AS rating FROM playsOnArtist pa
+JOIN totalPlays tp ON (pa.userid = tp.userid);
