@@ -1,0 +1,8 @@
+// numero de artistas diferentes que ha escuchado cada cliente:
+CREATE TABLE artistperuser AS
+SELECT  userid, count(DISTINCT artid) as numArtist FROM eventos GROUP BY userid;
+
+
+// numero de canciones escuchadas por cada usuario
+CREATE TABLE numrepsperuser AS
+SELECT userId, COUNT(*) as totalPlaysPerUser FROM eventos GROUP BY userId;

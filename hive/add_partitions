@@ -1,0 +1,12 @@
+-- Para anyadir particiones a las tablas de clientes y eventos
+-- Ejecutar de la siguiente forma: 
+-- ----------------------
+-- hive -hiveconf FECHA='2017-03-14' -f add_partitions
+
+
+set hivevar:FECHA=${hiveconf:FECHA};
+
+--ALTER TABLE practica.clientes ADD PARTITION (fecha_procesado='${FECHA}') LOCATION '/user/cloudera/mrec/users/${FECHA}';
+
+ALTER TABLE practica.eventos ADD PARTITION (fecha_procesado='${FECHA}') LOCATION '/user/cloudera/mrec/events/${FECHA}';
+

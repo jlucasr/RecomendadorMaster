@@ -1,0 +1,17 @@
+
+use practica;
+
+// numero de reproducciones por aritsta de cada usuario
+CREATE TABLE numrepUserArtist AS
+SELECT  userId,  artId, COUNT(*) as numrep FROM eventos GROUP BY userId, artId;
+
+// rating de cada usuario por artista:
+CREATE TABLE ratingsperartist AS
+select userId, artId, numrep/sum(numrep) OVER ( PARTITION BY userid) AS rating from numrepUserArtist;
+
+
+
+
+
+
+
