@@ -157,6 +157,20 @@ public class Utils
 		return padding + s;
 	}
 	
+	public String getArtist(int artId)
+	{
+		String s = String.valueOf(artId);
+		int paddingLength = 6 - s.length();
+		
+		String padding = "";
+		for (int i = 0; i < paddingLength; i++)
+		{
+			padding += "0";
+		}
+		
+		return padding + s;
+	}
+	
 	public String getRandomTimestamp()
 	{
 		SecureRandom random = new SecureRandom();

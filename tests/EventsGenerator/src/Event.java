@@ -12,14 +12,32 @@ public class Event
 	private String trackName;
 	private String row;
 	
-	public Event(PrintWriter writer, int usersNumber, int artistsNumber)
+	public Event(PrintWriter writer, int usersNumber, int artistsNumber, int userForced, int artistForced)
 	{
 		Utils u = new Utils(usersNumber, artistsNumber);
 		
-		userId = u.getRandomUser();
+		if (userForced == 0)
+		{
+			userId = u.getRandomUser();
+		}
+		else
+		{
+			userId = u.getUser(userForced);
+		}
+		
 		timestamp = u.getRandomTimestamp();
-		artId = u.getRandomArtist();
+		
+		if (artistForced == 0)
+		{
+			artId = u.getRandomArtist();
+		}
+		else
+		{
+			artId = u.getArtist(artistForced);
+		}
+		
 		artName = u.getRandomContent(8) + "artist";
+		
 		trackName = u.getRandomContent(16) + "track";
 
 		row = userId + "\t" + timestamp + "\t" + artId + "\t" + artName + "\t" + trackName;

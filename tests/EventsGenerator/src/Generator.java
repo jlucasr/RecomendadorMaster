@@ -7,6 +7,8 @@ public class Generator
 	static final String pathFileEvents = "C://tmp/userid-timestamp-artid-artname-traid-traname.tsv";
 	static final int usersNumber = 10;
 	static final int artistsNumber = 40;
+	static final int artistForced = 0;
+	static final int userForced = 0;
 	
 	static final int newUsers = 200;
 	static final int newEvents = 500;
@@ -32,7 +34,7 @@ public class Generator
 		
 		for (int i = 0; i < newEvents; i++)
 		{
-			new Event(writerEvents, usersNumber, artistsNumber);
+			new Event(writerEvents, usersNumber, artistsNumber, userForced, artistForced);
 		}
 		
 		writerEvents.close();

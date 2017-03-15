@@ -33,16 +33,19 @@ public class User
 			row = row + gender;
 		}
 		row = row + "\t";
+		
 		if ((u.isField()) && (!isEmpty))
 		{
 			row = row + age;
 		}
 		row = row + "\t";
+		
 		if ((u.isField()) && (!isEmpty))
 		{
 			row = row + country;
 		}
 		row = row + "\t";
+		
 		if ((u.isField()) && (!isEmpty))
 		{
 			row = row + dateRegister;
