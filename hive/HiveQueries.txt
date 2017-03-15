@@ -9,3 +9,7 @@ GROUP BY userid, artid;
 CREATE TABLE ratings AS
 SELECT pa.userid, pa.artid, (pa.playsNumber/tp.totalPlays) AS rating FROM playsOnArtist pa
 JOIN totalPlays tp ON (pa.userid = tp.userid);
+
+CREATE TABLE artistsIds AS
+SELECT DISTINCT(artid), ROW_NUMBER() OVER(PARTITION BY artid) AS artistsIds FROM events;
+
