@@ -3,8 +3,8 @@ import java.io.PrintWriter;
 
 public class Generator
 {	
-	static final String pathFileUsers = "C://tmp/userid-profile1.tsv";
-	static final String pathFileEvents = "C://tmp/userid-timestamp-artid-artname-traid-traname.tsv";
+	static final String pathFileUsers = "/home/cloudera/tmptest/userid-profile1.tsv";
+	static final String pathFileEvents = "/home/cloudera/tmptest/userid-timestamp-artid-artname-traid-traname.tsv";
 	static final int usersNumber = 10;
 	static final int artistsNumber = 40;
 	static final int artistForced = 0;
@@ -27,14 +27,16 @@ public class Generator
 		
 		for (int i = 0; i < newUsers; i++)
 		{
-			new User(writerUsers, usersNumber + i, usersNumber, artistsNumber);
+			User u = new User(usersNumber + i, usersNumber, artistsNumber);
+			writerUsers.println(u.getRow());			
 		}
 		
 		writerUsers.close();
 		
 		for (int i = 0; i < newEvents; i++)
 		{
-			new Event(writerEvents, usersNumber, artistsNumber, userForced, artistForced);
+			Event e = new Event(usersNumber, artistsNumber, userForced, artistForced);
+			writerEvents.println(e.getRow());
 		}
 		
 		writerEvents.close();

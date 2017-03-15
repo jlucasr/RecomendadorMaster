@@ -1,5 +1,3 @@
-import java.io.PrintWriter;
-
 public class User
 {	
 	static final String timestampStrings[] = { "2007-09-23 10:10:10.0", "2017-10-03 10:10:10.0",
@@ -11,8 +9,13 @@ public class User
 	private String country;
 	private String dateRegister;
 	private String row;	
+	
+	public String getRow()
+	{
+		return row;
+	}
 
-	public User(PrintWriter writer, int newUserId, int usersNumber, int artistsNumber)
+	public User(int newUserId, int usersNumber, int artistsNumber)
 	{
 		Utils u = new Utils(usersNumber, artistsNumber);
 		
@@ -53,7 +56,5 @@ public class User
 		row = row + "\t";
 
 		System.out.println("USER: " + row);
-
-		writer.println(row);
 	}
 }

@@ -1,5 +1,5 @@
-import java.security.SecureRandom;
 import java.sql.Timestamp;
+import java.util.Random;
 
 public class Utils
 {
@@ -12,10 +12,7 @@ public class Utils
 	
 	public String getRandomInt(int limit)
 	{
-		SecureRandom random = new SecureRandom();
-		byte[] seed = random.generateSeed(8);
-		random = new SecureRandom(seed);
-
+		Random random = new Random();
 		int output = random.nextInt(limit);
 		
 		return String.valueOf(output);
@@ -23,11 +20,10 @@ public class Utils
 	
 	public int getRandomIntNet(int limit)
 	{
-		SecureRandom random = new SecureRandom();
-		byte[] seed = random.generateSeed(8);
-		random = new SecureRandom(seed);
+		Random random = new Random();
+		int output = random.nextInt(limit);
 
-		return random.nextInt(limit);
+		return (output);
 	}
 	
 	public boolean isField()
@@ -65,10 +61,7 @@ public class Utils
 	
 	public String getRandomGender()
 	{
-		SecureRandom random = new SecureRandom();
-		byte[] seed = random.generateSeed(8);
-		random = new SecureRandom(seed);
-		
+		Random random = new Random();
 		int output = random.nextInt(2);
 
 		if (output == 1)
@@ -83,11 +76,9 @@ public class Utils
 	
 	public String getRandomContent(int outputLength)
 	{
-		SecureRandom random = new SecureRandom();
-		byte[] seed = random.generateSeed(8);
-		random = new SecureRandom(seed);
-		
+		Random random = new Random();
 		long output = random.nextLong();
+
 		String convertedString = String.valueOf(output);
 		
 		String padding = "";
@@ -173,11 +164,12 @@ public class Utils
 	
 	public String getRandomTimestamp()
 	{
-		SecureRandom random = new SecureRandom();
-		byte[] seed = random.generateSeed(8);
-		random = new SecureRandom(seed);
+		//SecureRandom random = new SecureRandom();
+		//byte[] seed = random.generateSeed(8);
+		//random = new SecureRandom(seed);
 		
-		int index = random.nextInt(timestampStrings.length);
+		//int index = random.nextInt(timestampStrings.length);
+		int index = 1;
 		
 		Timestamp output= Timestamp.valueOf(timestampStrings[index]);
 

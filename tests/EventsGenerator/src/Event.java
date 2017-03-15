@@ -1,5 +1,3 @@
-import java.io.PrintWriter;
-
 public class Event
 {
 	static final String timestampStrings[] = 
@@ -12,7 +10,12 @@ public class Event
 	private String trackName;
 	private String row;
 	
-	public Event(PrintWriter writer, int usersNumber, int artistsNumber, int userForced, int artistForced)
+	public String getRow()
+	{
+		return row;
+	}
+	
+	public Event(int usersNumber, int artistsNumber, int userForced, int artistForced)
 	{
 		Utils u = new Utils(usersNumber, artistsNumber);
 		
@@ -43,7 +46,5 @@ public class Event
 		row = userId + "\t" + timestamp + "\t" + artId + "\t" + artName + "\t" + trackName;
 		
 		System.out.println("EVENT: " + row);
-		
-		writer.println(row);
 	}
 }
