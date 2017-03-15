@@ -8,8 +8,8 @@ public class Generator
 	static final int usersNumber = 10;
 	static final int artistsNumber = 40;
 	
-	static final int newUsers = 15;
-	static final int newEvents = 50;
+	static final int newUsers = 200;
+	static final int newEvents = 500;
 	
 	public static void main(String[] args)
 	{

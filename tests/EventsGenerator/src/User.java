@@ -15,14 +15,39 @@ public class User
 	public User(PrintWriter writer, int newUserId, int usersNumber, int artistsNumber)
 	{
 		Utils u = new Utils(usersNumber, artistsNumber);
+		
+		boolean isEmpty = u.isEmptyRow();
 
 		userId = u.getUser(newUserId);
-		gender = u.getRandomGender();
-		age = u.getRandomAge();
-		country = u.getRandomContent(5) + "country";
-		dateRegister = u.getRandomTimestamp();
+		if (!isEmpty)
+		{
+			gender = u.getRandomGender();
+			age = u.getRandomAge();
+			country = u.getRandomContent(5) + "country";
+			dateRegister = u.getRandomTimestamp();
+		}
 
-		row = userId + "\t" + gender + "\t" + age + "\t" + country + "\t" + dateRegister;
+		row = userId + "\t";
+		if ((u.isField()) && (!isEmpty))
+		{
+			row = row + gender;
+		}
+		row = row + "\t";
+		if ((u.isField()) && (!isEmpty))
+		{
+			row = row + age;
+		}
+		row = row + "\t";
+		if ((u.isField()) && (!isEmpty))
+		{
+			row = row + country;
+		}
+		row = row + "\t";
+		if ((u.isField()) && (!isEmpty))
+		{
+			row = row + dateRegister;
+		}
+		row = row + "\t";
 
 		System.out.println("USER: " + row);
 

@@ -21,8 +21,45 @@ public class Utils
 		return String.valueOf(output);
 	}
 	
-	public String getRandomAge()
+	public int getRandomIntNet(int limit)
 	{
+		SecureRandom random = new SecureRandom();
+		byte[] seed = random.generateSeed(8);
+		random = new SecureRandom(seed);
+
+		return random.nextInt(limit);
+	}
+	
+	public boolean isField()
+	{
+		int random = getRandomIntNet(10);
+		
+		if (random < 9)
+		{
+			return true;
+		}
+		else
+		{
+			return false;
+		}
+	}
+	
+	public boolean isEmptyRow()
+	{
+		int random = getRandomIntNet(50);
+		
+		if (random < 49)
+		{
+			return false;
+		}
+		else
+		{
+			return true;
+		}
+	}
+	
+	public String getRandomAge()
+	{	
 		return getRandomInt(maxAge);
 	}
 	
@@ -38,13 +75,9 @@ public class Utils
 		{
 			return "m";
 		}
-		else if (output == 0)
-		{
-			return "f";
-		}
 		else
 		{
-			return null;
+			return "f";
 		}
 	}
 	
