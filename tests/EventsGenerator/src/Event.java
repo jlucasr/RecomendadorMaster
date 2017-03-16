@@ -39,7 +39,7 @@ public class Event
 			artId = u.getArtist(artistForced);
 		}
 		
-		artName = u.getRandomContent(8) + "artist";
+		artName = artId + "artist";
 		
 		trackName = u.getRandomContent(16) + "track";
 
