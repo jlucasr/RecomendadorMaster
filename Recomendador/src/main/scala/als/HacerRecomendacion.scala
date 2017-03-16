@@ -10,8 +10,9 @@ import org.apache.spark.{ SparkConf, SparkContext }
 import org.apache.spark.sql.functions._
 import java.util.Calendar
 import java.text.SimpleDateFormat
+import org.apache.spark.streaming._
 
-case class Row(userid: Int, artidnum: Int, rating: Double)
+case class Fila(userid: Int, artidnum: Int)
 
 object HacerRecomendacion extends App {
 
@@ -19,6 +20,8 @@ object HacerRecomendacion extends App {
   System.setProperty("hive.metastore.uris", "thrift://sandbox.hortonworks.com:9083");
   val sc = new SparkContext(conf)
   val hiveContext = new HiveContext(sc)
+  val sqlContext = new SQLContext(sc)
+  val ssc = new StreamingContext(sc, Seconds(15))
   val hostName = "sandbox.hortonworks.com"
   // fecha de hoy
   val now = Calendar.getInstance().getTime()
@@ -27,21 +30,27 @@ object HacerRecomendacion extends App {
 
   val modelLoaded: ALSModel = ALSModel.load("/root/Documents/Parte1_Recomendador/model")
     
-  val cliente1 = Row(1, 1,1.0)
-  val cliente2 = Row(1, 2,1.0)
-  val cliente3 = Row(1, 3,1.0)
-  val todos: RDD[Row] = sc.parallelize(Seq(cliente1,cliente2,cliente3))
-  val sqlContext = new SQLContext(sc)
+  val cliente1 = Fila(1, 1)
+  val cliente2 = Fila(1, 2)
+  val cliente3 = Fila(1, 3)
+  val todos: RDD[Fila] = sc.parallelize(Seq(cliente1,cliente2,cliente3))
+  
   val todosDF = sqlContext.createDataFrame(todos)
-  val artistNames: DataFrame = hiveContext.sql("SELECT artid,artname,artidnum FROM practica.artidwithnum")
+  //val artistNames: DataFrame = hiveContext.sql("SELECT artid,artname,artidnum FROM practica.artidwithnum")
   
-  val predictions = modelLoaded.transform(todosDF).select("userid", "artidnum", "rating","prediction")
-  predictions.registerTempTable("predic")
-  artistNames.registerTempTable("artist")
-
-  val predictionsWithArtist = sqlContext.sql("SELECT * FROM artist A JOIN predic B ON (A.artidnum = B.artidnum )").show
-  //val predictionsWithArtist = predictions.join(artistNames, predictions("artidnum")  === artistNames("artidnum"),"inner").show
+  val predictions: DataFrame  = modelLoaded.transform(todosDF).select("userid", "artidnum","prediction")
   
+  //predictions.registerTempTable("predic")
+   predictions.show
   
+   //- comenzar streaming
+//  try{
+//     ssc.start()
+//     ssc.awaitTermination()
+//    
+//  }finally{
+//    sc.stop()
+//  }
+ 
   
 }
