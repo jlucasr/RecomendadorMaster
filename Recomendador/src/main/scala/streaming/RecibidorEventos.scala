@@ -79,8 +79,8 @@ object RecibidorEventos extends App with BusquedasEventos{
           case (key, msg) => {
             val cadEvento = msg
             val fields = cadEvento.split('\t')
-
-            val clave = fields(0)
+			val iniclave = fields(0)
+            val clave = iniclave.substring(iniclave.length - 5, iniclave.length())
             //compruebo si hay cliente insertado con esa clave
             val get1 = new Get(Bytes.toBytes(clave))
             val put = new Put(Bytes.toBytes(clave))

@@ -9,7 +9,6 @@ import org.apache.spark.rdd._
 import org.apache.hadoop.hbase.spark._
 import java.util.Calendar
 import java.text.SimpleDateFormat 
-import org.apache.spark.sql.hive.HiveContext
 import org.apache.spark.sql.{ DataFrame, SQLContext ,Row}
 import org.apache.spark.ml.recommendation.{ ALSModel, ALS }
 
@@ -74,8 +73,10 @@ object CargaArtistHBase extends App{
     
       println(s"Voy a insertar: $clave, $artid, $artname")
       
-      val put = new Put(Bytes.toBytes(clave))       
-      put.addColumn(nameFam, "artid".getBytes(), artid.getBytes())
+      val put = new Put(Bytes.toBytes(clave))   
+      if (!artid.isEmpty()) {
+        put.addColumn(nameFam, "artid".getBytes(), artid.getBytes())
+      }
       put.addColumn(nameFam, "artname".getBytes(), artname.getBytes())
       put   
       

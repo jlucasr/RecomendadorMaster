@@ -1,1 +1,1 @@
-{"class":"org.apache.spark.ml.recommendation.ALSModel","timestamp":1489677142522,"sparkVersion":"1.6.0","uid":"als_ccfd718cd91f","paramMap":{"itemCol":"artidnum","predictionCol":"prediction","userCol":"userid"},"rank":10}
+{"class":"org.apache.spark.ml.recommendation.ALSModel","timestamp":1489966698596,"sparkVersion":"1.6.0","uid":"als_7bf8cc0cecdb","paramMap":{"userCol":"userid","itemCol":"artidnum","predictionCol":"prediction"},"rank":10}
