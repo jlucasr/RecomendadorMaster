@@ -1,25 +1,18 @@
 
 use practica;
 
-// numero de reproducciones por aritsta de cada usuario
+-- numero de reproducciones por aritsta de cada usuario
 CREATE TABLE numrepUserArtist AS
 SELECT  userId,  artId, COUNT(*) as numrep FROM eventos GROUP BY userId, artId;
 
-// artid en formato entero
+-- artid en formato entero
 CREATE TABLE artidWithNum AS
 SELECT DISTINCT artid,artname, ROW_NUMBER() OVER () AS artidnum FROM eventos;
 
-// rating de cada usuario por artista:
+-- rating de cada usuario por artista:
 CREATE TABLE ratingsperartist AS
 select userId, artId, numrep/sum(numrep) OVER ( PARTITION BY userid) AS rating from numrepUserArtist;
 
-// esta tabla tiene como artid un entero que será la entrada del algoritmo ALS
+-- esta tabla tiene como artid un entero que será la entrada del algoritmo ALS
 CREATE TABLE ratingsWithArtist AS 
 SELECT userid,A.artid, rating,artname,artidnum  from ratingsperartist A  JOIN artidWithNum B ON (A.artid = B.artid);
-
-
-
-
-
-
-

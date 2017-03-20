@@ -8,11 +8,11 @@ if [ -z "$1" ]
 fi
 
 
-sqoop job --create addClientes -- import \
+sqoop job --create addUsers -- import \
 --connect jdbc:mysql://quickstart.cloudera/practica \
 --username root --password cloudera \
 --table clientes \
---target-dir /user/cloudera/MusicRecommendation/users/`echo $FECHA` \
+--target-dir /user/cloudera/mrec/users/`echo $FECHA` \
 --null-non-string '\\N' \
 --split-by id \
 --driver com.mysql.jdbc.Driver \

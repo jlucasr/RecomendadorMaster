@@ -1,0 +1,28 @@
+// Creamos directorios en HDFS
+hadoop fs -mkdir /user/cloudera/mrec/
+hadoop fs -mkdir /user/cloudera/mrec/users
+hadoop fs -mkdir /user/cloudera/mrec/events
+
+// Entramos a mysql introduciendo la password y creamos la database practica
+mysql -u root -p
+create database practica;
+use practica;
+
+// Desde el path del python script, lo ejecutamos (con el fichero de los usuarios copiado en ese directorio)
+cd /home/cloudera/mrec/datasets/users
+python import.py
+
+// Desde my sql comprobamos que se han introducido correctamente los usuarios (tabla clientes) 
+select * from clientes;
+
+// Desde el path del sqoop file, lo ejecutamos
+cd /home/cloudera/mrec/sqoop
+sh sqoopJob.sh
+
+// Tras esto, listamos el job para comprobar su correcta creación
+sqoop job --list
+
+// Lo ejecutamos
+sqoop job --exec addUsers
+
+

@@ -1,0 +1,20 @@
+// Crear topic de Kafka con una de las dos sentencias que funcione desde el path donde esté el agente flume.
+kafka-topics --create --zookeeper quickstart.cloudera:2181/kafka --topic eventsTopic --partitions 1 --replication-factor 1
+kafka-topics --create --zookeeper quickstart.cloudera:2181/ --topic eventsTopic --partitions 1 --replication-factor 1
+
+// Comprobar que se creó correctamente el topic
+kafka-topics --zookeeper localhost:2181/kafka --list
+kafka-topics --zookeeper localhost:2181/ --list
+
+// Lanzar agente Flume desde el directorio donde está
+cd /home/cloudera/mrec/flume
+flume-ng agent --conf-file flumeAgent.conf --name flumeAgent --plugins-path /home/cloudera/mrec/flume/plugins
+
+// Lanzar consumidores Kafka antes de lanzar eventos
+kafka-console-consumer --new-consumer --bootstrap-server quickstart.cloudera:9092 --topic bannersTopic
+kafka-console-consumer --new-consumer --bootstrap-server quickstart.cloudera:9092 --topic usersTopic
+
+// Se puede comprobar si el servidor de Kafka está vivo en Zookeeper (tiene que haber ids) y también los topics creados
+zookeeper-client
+ls /brokers/ids
+ls /brokers/topics

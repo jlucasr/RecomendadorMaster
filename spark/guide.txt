@@ -1,0 +1,17 @@
+// Ejecutamos los spark que llevan a HBase los banners y los users
+Run GenerarBannerHDFS
+Run CargaBannerHBase
+Run CargaClientesHBase
+
+// Lanzamos streaming
+Run RecibidorEventos
+
+// Conectamos a HBase
+hbase shell
+
+list
+
+scan "nsmrec:banners"
+scan "nsmrec:users"
+scan "nsmrec:events"
+scan "nsmrec:artists"

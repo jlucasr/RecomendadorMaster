@@ -6,7 +6,7 @@
 
 set hivevar:FECHA=${hiveconf:FECHA};
 
---ALTER TABLE practica.clientes ADD PARTITION (fecha_procesado='${FECHA}') LOCATION '/user/cloudera/mrec/users/${FECHA}';
+ALTER TABLE practica.clientes ADD PARTITION (fecha_procesado='${FECHA}') LOCATION '/user/cloudera/mrec/users/${FECHA}';
 
 ALTER TABLE practica.eventos ADD PARTITION (fecha_procesado='${FECHA}') LOCATION '/user/cloudera/mrec/events/${FECHA}';
 

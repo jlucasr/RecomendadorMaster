@@ -1,0 +1,46 @@
+// Vamos al directorio de hive para ejecutar los ficheros con las sentencias Hive
+cd /home/cloudera/mrec/hive
+
+hive -f create_tables
+
+// Entramos en Hive y comprobamos las nuevas tablas
+hive
+use practica;
+show tables;
+quit;
+
+// Anadimos location y particiones
+hive -hiveconf FECHA='2017-03-18' -f add_partitions
+
+// Entramos en Hive y comprobamos las nuevas tablas con el contenido
+hive
+use practica;
+show tables;
+select * from clientes;
+select * from eventos;
+quit;
+
+// Anadimos location y particiones
+hive -f create_ratings
+
+// Entramos en Hive y comprobamos las nuevas tablas con el contenido
+hive
+use practica;
+show tables;
+select * from numrepuserartist;
+select * from artidWithNum;
+select * from ratingsperartist;
+select * from ratingsWithArtist;
+quit;
+
+// Borramos la tmp de hive para que no de problemas
+sudo rm -rf /tmp/hive
+
+// Ejecutamos los spark para crear modelo y preparar el streaming
+Run CargaArtistHBase
+Run CargaDirecArtist
+Run CrearModelo
+
+
+
+
