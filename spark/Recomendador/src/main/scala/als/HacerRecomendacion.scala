@@ -37,8 +37,10 @@ object HacerRecomendacion extends App {
   val now = Calendar.getInstance().getTime()
   val formatter = new SimpleDateFormat("YYYY-MM-dd")
   val cadNow = formatter.format(now)
+  
+  val rutaLocal = s"/root/Documents/Parte1_Recomendador/model/$cadNow"
 
-  val modelLoaded: ALSModel = ALSModel.load("/root/Documents/Parte1_Recomendador/model")
+  val modelLoaded: ALSModel = ALSModel.load(rutaLocal)
 
   // consultar numero de artistas de la tabla de Hbase
   val hbaseConf = HBaseConfiguration.create()

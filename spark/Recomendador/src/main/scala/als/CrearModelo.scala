@@ -15,21 +15,31 @@ import org.apache.hadoop.hbase._
 import org.apache.hadoop.hbase.client._
 import org.apache.hadoop.hbase.util.Bytes
 import org.apache.hadoop.hbase.spark._
-
+import org.apache.hadoop.conf.Configuration
+import org.apache.hadoop.fs.FileSystem
+import org.apache.hadoop.fs.Path
+import org.apache.spark.ml.util.MLWriter
 
 object CrearModelo extends App {
 
   // metastore 
   // thrift://sandbox.hortonworks.com:9083
-
+  val hostName = "sandbox.hortonworks.com"
   val conf = new SparkConf().setMaster("local[*]").setAppName("Spark con Hive")
-  System.setProperty("hive.metastore.uris", "thrift://sandbox.hortonworks.com:9083");
   val sc = new SparkContext(conf)
+  
+  val fileConf = new Configuration()
+  fileConf.set("fs.defaultFS", s"hdfs://$hostName:8020")
+  val fs = FileSystem.get(fileConf)
+  
+  val output = fs.create(new Path("/user/cloudera/mrec/model/a1.txt"))
+
+  System.setProperty("hive.metastore.uris", "thrift://sandbox.hortonworks.com:9083");
+ 
   val hiveContext = new HiveContext(sc)
   val numIterations = 10
   val rank = 10
 
-  val hostName = "sandbox.hortonworks.com"
   // fecha de hoy
   val now = Calendar.getInstance().getTime()
   val formatter = new SimpleDateFormat("YYYY-MM-dd")
@@ -48,10 +58,12 @@ object CrearModelo extends App {
     val als = new ALS().setUserCol("userid").setItemCol("artidnum").setRatingCol("rating").setRank(rank).setMaxIter(numIterations)
 
     val model: ALSModel = als.fit(ratingsDF)
+
+    val rutaLocal = s"/root/Documents/Parte1_Recomendador/model/$cadNow"
     
+    model.write.overwrite().save(rutaLocal)
 
-    model.write.save("/root/Documents/Parte1_Recomendador/model")
-
+    
   } finally {
     sc.stop()
   }
