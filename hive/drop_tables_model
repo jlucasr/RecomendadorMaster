@@ -1,0 +1,10 @@
+use practica;
+
+DROP TABLE IF EXISTS numrepUserArtist;
+
+DROP TABLE IF EXISTS artidWithNum;
+
+DROP TABLE IF EXISTS ratingsperartist;
+
+DROP TABLE IF EXISTS ratingsWithArtist;
+

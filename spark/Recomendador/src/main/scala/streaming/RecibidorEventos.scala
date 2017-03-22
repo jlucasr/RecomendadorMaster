@@ -95,7 +95,7 @@ object RecibidorEventos extends App with BusquedasEventos {
 
               val nuevoNum: Integer = numRep + 1
 
-              if (nuevoNum == NUM_EVENTOS_BANNER) {
+              if (nuevoNum >= NUM_EVENTOS_BANNER) {
                 // get para obtener el valor de banner:
                 val get4 = new Get(Bytes.toBytes(clave))
                 val filaEvents = tableEvent.get(get4);
