@@ -1,2 +1,2 @@
-# RecomendadorMaster
-Proyecto Recomendador final de master
+# Practica Recomendador
+Proyecto final Recomendador de canciones
